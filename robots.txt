@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://keroger2k.github.io/sitemap.xml 
