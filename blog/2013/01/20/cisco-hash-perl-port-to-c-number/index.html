@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Mustache - Kyle Rogers</title>
+  <title>Cisco::Hash Perl Port to C# - Kyle Rogers</title>
   <meta name="author" content="Kyle Rogers">
 
   
-  <meta name="description" content="Category: Mustache">
+  <meta name="description" content="Recently had to write a script that looks at passwords on cisco devices. This small piece of code is a port of Perl’s Cisco::Hash module to C#. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://keroger2k.github.ioblog/categories/mustache">
+  <link rel="canonical" href="http://keroger2k.github.io/blog/2013/01/20/cisco-hash-perl-port-to-c-number">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Kyle Rogers" type="application/atom+xml">
@@ -76,36 +76,122 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Mustache</h1>
+    
+      <h1 class="entry-title">Cisco::Hash Perl Port to C#</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-20T16:46:00-06:00" pubdate data-updated="true">Jan 20<span>th</span>, 2013</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>Recently had to write a script that looks at passwords on cisco devices.  This small piece of code is a port of Perl’s Cisco::Hash module to C#.  Nothing fancy but it works.  Don’t have a need for the encrypt portion so I didn’t add that just yet.  Maybe later.</p>
 
-  
-  <h2>2012</h2>
+<div><script src='https://gist.github.com/4457022.js?file=IOS7Crypt.cs'></script>
+<noscript><pre><code>public static class IOS7Crypt {
 
-<article>
-  
-<h1><a href="/blog/2012/06/01/up-and-running-with-sinatra/">Up and running with Sinatra</a></h1>
-<time datetime="2012-06-01T00:13:00-05:00" pubdate><span class='month'>Jun</span> <span class='day'>01</span> <span class='year'>2012</span></time>
+    private static byte[] xlatPrime = new byte[] { 
+                0x64, 0x73, 0x66, 0x64, 0x3b, 0x6b, 0x66, 0x6f,
+                0x41, 0x2c, 0x2e, 0x69, 0x79, 0x65, 0x77, 0x72,
+                0x6b, 0x6c, 0x64, 0x4a, 0x4b, 0x44, 0x48, 0x53,
+                0x55, 0x42, 0x73, 0x67, 0x76, 0x63, 0x61, 0x36,
+              0x39, 0x38, 0x33, 0x34, 0x6e, 0x63, 0x78, 0x76,
+                0x39, 0x38, 0x37, 0x33, 0x32, 0x35, 0x34, 0x6b,
+                0x3b, 0x66, 0x67, 0x38, 0x37 
+        };
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/mustache/'>Mustache</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>, <a class='category' href='/blog/categories/sinatra/'>Sinatra</a></span>
-</footer>
 
+    public static string Decrypt(string hash) {
 
-</article>
+      if (hash.Length &lt; 4) {
+        throw new ArgumentException(&quot;Type 7 Hashes must be longer than 4 characters&quot;);
+      }
+
+      int seed = int.Parse(hash.Substring(0, 2));
+      int c = 2;
+      var result = new StringBuilder();
+      while (c &lt; hash.Length) {
+        string t = hash.Substring(c, 2);
+        int h = int.Parse(t, System.Globalization.NumberStyles.HexNumber);
+        int v = h ^ xlatPrime[seed++];
+        result.Append((char)v);
+        c += 2;
+        seed %= 53;
+      }
+      return result.ToString();
+    }
+
+  }</code></pre></noscript></div>
 
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Kyle Rogers</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-20T16:46:00-06:00" pubdate data-updated="true">Jan 20<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://keroger2k.github.io/blog/2013/01/20/cisco-hash-perl-port-to-c-number/" data-via="keroger2k" data-counturl="http://keroger2k.github.io/blog/2013/01/20/cisco-hash-perl-port-to-c-number/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/09/20/enums-to-selectlist/" title="Previous Post: Enums to SelectList">&laquo; Enums to SelectList</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -207,7 +293,10 @@
       var disqus_shortname = 'watersound';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://keroger2k.github.io/blog/2013/01/20/cisco-hash-perl-port-to-c-number/';
+        var disqus_url = 'http://keroger2k.github.io/blog/2013/01/20/cisco-hash-perl-port-to-c-number/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
