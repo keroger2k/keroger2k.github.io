@@ -1,24 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-
-  <title><![CDATA[Category: Mustache | Kyle Rogers]]></title>
-  <link href="http://keroger2k.github.io/blog/categories/mustache/atom.xml" rel="self"/>
-  <link href="http://keroger2k.github.io/"/>
-  <updated>2013-08-20T13:26:13-05:00</updated>
-  <id>http://keroger2k.github.io/</id>
-  <author>
-    <name><![CDATA[Kyle Rogers]]></name>
-    
-  </author>
-  <generator uri="http://octopress.org/">Octopress</generator>
-
-  
-  <entry>
-    <title type="html"><![CDATA[Up and running with Sinatra]]></title>
-    <link href="http://keroger2k.github.io/blog/2012/06/01/up-and-running-with-sinatra/"/>
-    <updated>2012-06-01T00:13:00-05:00</updated>
-    <id>http://keroger2k.github.io/blog/2012/06/01/up-and-running-with-sinatra</id>
-    <content type="html"><![CDATA[<h2>Introduction</h2>
+<h2>Introduction</h2>
 
 <p>I&rsquo;ve been playing around with ruby on rails for quite some time now.  Although I&rsquo;m primarily a
 .NET developer, I find rails a very interesting framework to develop with mainly because of the
@@ -34,21 +14,27 @@ things are done within the .NET world.</p>
 
 <p>To get started create a simple directory framework for an application that for now will just serve up static content:</p>
 
-<p>```
-&ndash; Hotel</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>- Hotel
+</span><span class='line'>  - App\
+</span><span class='line'>      - app.rb
+</span><span class='line'>      - boot.rb
+</span><span class='line'>      - hotel.rb
+</span><span class='line'>  - Gemfile
+</span><span class='line'>  - Rakefile
+</span><span class='line'>  - config.ru
+</span><span class='line'>  - Procfile
+</span><span class='line'>  - Readme.md</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>- App\
-    - app.rb
-    - boot.rb
-    - hotel.rb
-- Gemfile
-- Rakefile
-- config.ru
-- Procfile
-- Readme.md
-</code></pre>
-
-<p>```</p>
 
 <p>The &lsquo;Readme.md&rsquo; file is mainly for use with <a href="http://www.github.org">github</a>.  Github uses the readme file
 for a way for the  author to explain the purpose of the application along with any helpful syntaxes, scenarios etc&hellip;</p>
@@ -70,7 +56,7 @@ application up and running.</p>
 
 <p>A lot of the gems above I used because <a href="http://www.heroku.com">Heroku</a>.  It just makes things easier for me.  There are a lot of great alternatives to mustache, thin, etc&hellip;, but I&rsquo;ll be using these in my examples.  There are also some gems for testing that I like to use, but they are not required for getting up and running.</p>
 
-<p><div><script src='https://gist.github.com/2848476.js?file=Gemfile'></script>
+<div><script src='https://gist.github.com/2848476.js?file=Gemfile'></script>
 <noscript><pre><code>source 'http://rubygems.org'
 gem 'rack'
 gem 'rake'
@@ -84,30 +70,30 @@ group :test do
   gem 'mocha',        '~&gt;0.11.1'
 end
 </code></pre></noscript></div>
-</p>
+
 
 <p>The procfile is what foreman uses to start the thin webserver.  In the example below it is telling the thin webserver
 to start up and use port 5050.  Once the webserver is up and running you will be able to preview the results by going to
 <a href="http://localhost:5050">http://localhost:5050</a>.</p>
 
-<p><div><script src='https://gist.github.com/2848476.js?file=Procfile'></script>
+<div><script src='https://gist.github.com/2848476.js?file=Procfile'></script>
 <noscript><pre><code>web:      bundle exec thin start -p 5050
 </code></pre></noscript></div>
-</p>
+
 
 <p>The config.ru file is executed when the application is starting and instructs the application
 to require certain libraries that we&rsquo;ve included.  In this example I&rsquo;ve put most of the require statements in a file called boot.rb and the first line is giving it the location to that file for the includes.</p>
 
-<p><div><script src='https://gist.github.com/2848476.js?file=config.ru'></script>
+<div><script src='https://gist.github.com/2848476.js?file=config.ru'></script>
 <noscript><pre><code>require File.expand_path(File.dirname(__FILE__) + '/app/boot')
 
 map('/')         { run Hotel::App }</code></pre></noscript></div>
-</p>
+
 
 <p>The boot.rb file isn&rsquo;t required, because it could all be put into the config.ru file, but this is a nice way
 to keep the require statements for the application in a centralized place.</p>
 
-<p><div><script src='https://gist.github.com/2848476.js?file=boot.rb'></script>
+<div><script src='https://gist.github.com/2848476.js?file=boot.rb'></script>
 <noscript><pre><code>$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__))
 
 require &quot;rubygems&quot;
@@ -119,11 +105,11 @@ require 'mustache/sinatra'
 require 'hotel'
 require 'app'
 </code></pre></noscript></div>
-</p>
+
 
 <p>Using rake can be extremely powerful.  It allows you to configure common tasks within your application.  In the startup example there is only one task that needs to be performed, starting the application itself.  In this example it is telling foreman to start which in turn will read the Procfile in the root directory and foreman will start the thin webserver on the port 5050.</p>
 
-<p><div><script src='https://gist.github.com/2848476.js?file=Rakefile'></script>
+<div><script src='https://gist.github.com/2848476.js?file=Rakefile'></script>
 <noscript><pre><code>require 'rubygems'
 require 'rake'
 
@@ -135,12 +121,12 @@ desc &quot;Start the server&quot;
 task :start do
   Kernel.exec &quot;bundle exec foreman start&quot;
 end</code></pre></noscript></div>
-</p>
+
 
 <p>The app.rb is the meat of the application so far.  This class inherits from Sinatra::Base.  This is the base class for all Sinatra applications.  Here we are telling our Sinatra application to respond to only the &ldquo;/&rdquo; GET request.  So any other request currently will return a 404.  If a &ldquo;/&rdquo; GET request is received it will simply respond with the current time on the server.  Nothing fancy but proves that Sinatra is up and running correctly.  You will need to understand the different HTML
 method definitions to layout responses for your Sinatra application.  The most commonly used methods are GET, POST, PUT, DELETE.</p>
 
-<p><div><script src='https://gist.github.com/2848476.js?file=app.rb'></script>
+<div><script src='https://gist.github.com/2848476.js?file=app.rb'></script>
 <noscript><pre><code>module Hotel
   class App &lt; Sinatra::Base
     get &quot;/&quot; do
@@ -148,21 +134,17 @@ method definitions to layout responses for your Sinatra application.  The most c
     end
   end
 end</code></pre></noscript></div>
-</p>
+
 
 <p>Here is where application specific logic will be stored.  Nothing is currently required so this is an empty class currently.</p>
 
-<p><div><script src='https://gist.github.com/2848476.js?file=hotel.rb'></script>
+<div><script src='https://gist.github.com/2848476.js?file=hotel.rb'></script>
 <noscript><pre><code>module Hotel
 end</code></pre></noscript></div>
-</p>
+
 
 <p>Once all theses file are created and in place.  Run &lsquo;rake start&rsquo; and visit <a href="http://localhost:5050">http://localhost:5050</a> to see the current time on the server.</p>
 
 <h2>Conclusion</h2>
 
 <p>In this first post of mine I&rsquo;m not really showing too much of the functionality of Sinatra itself.  It is basically a guide on how to get up and running and what is required.  Although there is much less required to get started I think this is a good structure to start with for real applications.  If you want a bare bones up and running introduction the <a href="http://www.sinatrarb.com/">Sinatra</a> has some great examples.</p>
-]]></content>
-  </entry>
-  
-</feed>
