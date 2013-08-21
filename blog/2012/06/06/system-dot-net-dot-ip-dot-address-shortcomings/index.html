@@ -105,7 +105,7 @@
 
 <div class="entry-content"><h1>Overview</h1>
 
-<p>Perhaps I&rsquo;m going about this completely the wrong way, but from what I can tell, there really isn&rsquo;t much logic built into the framework for IP Addressing and C#. There is a System.Net.IPAddress class that has some very limited capabilities IMO. I just don&rsquo;t understand why there isn&rsquo;t some additional functionality with this class or some sister class that helps simplify common tasks with IP address functionality. For example an IP address is mostly useless alone. Without a subnet mask you have no real sense of the IP address. Once you have the subnet mask you then can extrapolate all the details such as network address, broadcast address, size, etc&hellip; I wish the System.Net.IPAddress class allowed you to do more things like this natively.</p>
+<p>Perhaps I&rsquo;m going about this completely the wrong way, but from what I can tell, there really isn&rsquo;t much logic built into the framework for IP Addressing and C#. There is a <a href="http://msdn.microsoft.com/en-us/library/system.net.ipaddress.aspx">System.Net.IPAddress</a> class that has some very limited capabilities IMO. I just don&rsquo;t understand why there isn&rsquo;t some additional functionality with this class or some sister class that helps simplify common tasks with IP address functionality. For example an IP address is mostly useless alone. Without a subnet mask you have no real sense of the IP address. Once you have the subnet mask you then can extrapolate all the details such as network address, broadcast address, size, etc&hellip; I wish the System.Net.IPAddress class allowed you to do more things like this natively.</p>
 
 <p>Below are a few methods to help extend on the logic of System.Net.IPAddress. I thought I&rsquo;d share what has been completed so far. I&rsquo;ve also included the NUnit test cases that go along with this class to help with understanding what each of the methods are doing.</p>
 
@@ -596,6 +596,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/08/21/max-width-and-min-width-media-queries-in-internet-explorer-8-and-below/">Max-width and Min-width Media Queries in Internet Explorer 8 and Below</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/01/20/cisco-hash-perl-port-to-c-number/">Cisco::Hash Perl Port to C#</a>
       </li>
     
@@ -609,10 +613,6 @@
     
       <li class="post">
         <a href="/blog/2012/06/06/system-dot-net-dot-ip-dot-address-shortcomings/">System.Net.IP.Address Shortcomings</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/06/01/up-and-running-with-sinatra/">Up and Running With Sinatra</a>
       </li>
     
   </ul>
