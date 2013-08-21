@@ -1,0 +1,16 @@
+.gist, .gist .gist-file .gist-data {
+	font-size: 87% !important;
+	line-height: 1.3em;
+}
+
+code {
+	background: #EEE;
+	padding: 1px 2px;
+	border: solid 1px #CCC;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+}
