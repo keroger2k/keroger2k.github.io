@@ -3,7 +3,9 @@ layout: post
 title: "max-width and min-width media queries in internet explorer 8 and below"
 date: 2013-08-21 15:12
 comments: true
-categories: 
+categories: twitter, bootstrap, Resond.js, Internet, Explorer, 8
+description: "Understanding Internet Explorer 8 and the lack of support of max-width and min-width"
+keywords: "twitter, bootstrap, chrome, internet explorer, css, respond.js, media" 
 ---
 
 Ever since [Twitter Bootstrap](www.twitter.com) came about I've been a huge fan.  It has been an awesome framework to utilize when working on rapid development and prototyping solutions for customer requirements.  For people who are not really UI strong, bootstrap has been a savior.  
@@ -20,8 +22,8 @@ Basically, the script loops through the CSS referenced in the page and runs a re
 From there, each media query block is appended to the head in order via style elements, and those style elements are enabled and disabled (read: appended and removed from the DOM) depending on how their min/max width compares with the browser width. The media attribute on the style elements will match that of the query in the CSS, so it could be "screen", "projector", or whatever you want. Any relative paths contained in the CSS will be prefixed by their stylesheet's href, so image paths will direct to their proper destination
 {% endblockquote %}
 
-After adding the <code>respond.js</code> script tag in my <code><head></code> tag and refreshing the page my problem was solved.  I also used a conditional clause to only load the script for IE8 or less.
+After adding the <code>respond.js</code> script tag in my <code>&lt;head&gt;</code> tag and refreshing the page my problem was solved.  I also used a conditional clause to only load the script for IE8 or less.
 
-{% gist 6299948 %}
+{% gist 6299948 index.html %}
 
 Hope this helps someone.  Not that it was a hard problem to solve, but it was shocking that Twitter Bootstrap didn't account for this issue.  Good luck.

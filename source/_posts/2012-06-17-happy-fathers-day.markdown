@@ -3,7 +3,9 @@ layout: post
 title: "Happy Fathers Day"
 date: 2012-06-17 15:38
 comments: true
-categories: 
+categories: Personal
+description: "Wonderful fathers day"
+keywords: "kids, wife, family, fathers day, appreciate, blessed" 
 ---
 
 Today is Father's Day. It is probably the best holiday of the year now for me. You can have Christmas, you can definitely keep my birthday, Father's Day is the bees knees. My wife is also probably the worlds best gift giver in the entire world when it comes to holidays like these. She always finds just the right gift that is always very thoughtful and very cool. I don't know if I'm just crazy or weird, but it is definitely a love hate thing with me. I love it that I am the recipient of the awesome gift, but at the same time it puts a tremendous amount of pressure on for Mothers Day. I am not a good gift giver. My family has given me money for almost every holiday since I was in high school. There is no thought. There is no love in those gifts. It is just money. Boring money. My family always gives me the excuse that they don't want to buy me something I don't want and would rather I just get something I do want. Since I've met my wife I've discovered that that path is extremely lazy. Apparently? This Father's Day did not disappoint again. Got some amazing photography picture of my sons for my office and a book that probably took 6 weeks to put together. Basically I need to start working on her Mother's Day gift this week or I'm going to be in trouble.

@@ -4,6 +4,8 @@ date: 2012-06-01 00:13
 comments: true
 sharing: true
 categories: [Sinatra, Ruby, Mustache]
+description: "Getting up and running with Sinatra"
+keywords: "sinatra, ruby, mustache, nuget, howto, help" 
 ---
 
 ## Introduction

@@ -3,6 +3,9 @@ layout: post
 title: "System.Net.IP.Address Shortcomings"
 date: 2012-06-06 15:35
 comments: true
+categories: ASP.NET, MVC
+description: "Dealing with the lack of support for a true IPAddress object within .NET"
+keywords: "asp.net, C#, ipaddress, system.net.ipaddress" 
 ---
 
 #Overview
