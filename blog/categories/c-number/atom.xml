@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: C# | Kyle Rogers]]></title>
+  <link href="http://keroger2k.github.io/blog/categories/c-number/atom.xml" rel="self"/>
+  <link href="http://keroger2k.github.io/"/>
+  <updated>2013-08-21T21:48:26-05:00</updated>
+  <id>http://keroger2k.github.io/</id>
+  <author>
+    <name><![CDATA[Kyle Rogers]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Cisco::Hash Perl Port to C#]]></title>
+    <link href="http://keroger2k.github.io/blog/2013/01/20/cisco-hash-perl-port-to-c-number/"/>
+    <updated>2013-01-20T16:46:00-06:00</updated>
+    <id>http://keroger2k.github.io/blog/2013/01/20/cisco-hash-perl-port-to-c-number</id>
+    <content type="html"><![CDATA[<p>Recently had to write a script that looks at passwords on cisco devices.  This small piece of code is a port of Perl’s Cisco::Hash module to C#.  Nothing fancy but it works.  Don’t have a need for the encrypt portion so I didn’t add that just yet.  Maybe later.</p>
+
+<p><div><script src='https://gist.github.com/4457022.js?file=IOS7Crypt.cs'></script>
+<noscript><pre><code>public static class IOS7Crypt {
+
+    private static byte[] xlatPrime = new byte[] { 
+                0x64, 0x73, 0x66, 0x64, 0x3b, 0x6b, 0x66, 0x6f,
+                0x41, 0x2c, 0x2e, 0x69, 0x79, 0x65, 0x77, 0x72,
+                0x6b, 0x6c, 0x64, 0x4a, 0x4b, 0x44, 0x48, 0x53,
+                0x55, 0x42, 0x73, 0x67, 0x76, 0x63, 0x61, 0x36,
+              0x39, 0x38, 0x33, 0x34, 0x6e, 0x63, 0x78, 0x76,
+	            0x39, 0x38, 0x37, 0x33, 0x32, 0x35, 0x34, 0x6b,
+	            0x3b, 0x66, 0x67, 0x38, 0x37 
+        };
+
+
+    public static string Decrypt(string hash) {
+
+      if (hash.Length &lt; 4) {
+        throw new ArgumentException(&quot;Type 7 Hashes must be longer than 4 characters&quot;);
+      }
+
+      int seed = int.Parse(hash.Substring(0, 2));
+      int c = 2;
+      var result = new StringBuilder();
+      while (c &lt; hash.Length) {
+        string t = hash.Substring(c, 2);
+        int h = int.Parse(t, System.Globalization.NumberStyles.HexNumber);
+        int v = h ^ xlatPrime[seed++];
+        result.Append((char)v);
+        c += 2;
+        seed %= 53;
+      }
+      return result.ToString();
+    }
+
+  }</code></pre></noscript></div>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Enums to SelectList]]></title>
+    <link href="http://keroger2k.github.io/blog/2012/09/20/enums-to-selectlist/"/>
+    <updated>2012-09-20T16:48:00-05:00</updated>
+    <id>http://keroger2k.github.io/blog/2012/09/20/enums-to-selectlist</id>
+    <content type="html"><![CDATA[<p>Recently I had an interview where I was sharing my screen to a couple people who were watching me struggle through the simple task they had me complete.  I had to create a simple drop down list that contain three values and my first thought for whatever reason was to use an Enum and just bind that to a drop down list with the HTML helper object.  However, it had been awhile since I had actually had to do that and after about 1 minute of trying to get it to work I simply gave up and moved on as  I was on the clock.  After the interview I looked back at some code that I currently maintain and found my solution.  It definitely brought back some of the pain that went into the initial implementation.  Although the answer is quite simple, during the pressure of an interview I just couldn’t recall.
+Basically, I just used a generic extension method off of type TEnum.  This allows you to just reference a single value of the Enum do a ToSelectList();</p>
+
+<p><div><script src='https://gist.github.com/3726104.js?file=EnumExtensions.cs'></script>
+<noscript><pre><code>
+    public static SelectList ToSelectList&lt;TEnum&gt;(this TEnum enumObj) 
+    {
+
+        var values = from TEnum e in Enum.GetValues(typeof(TEnum))
+                     select new { Value = e, Text = e.ToString() };
+
+        return new SelectList(values, &quot;Value&quot;, &quot;Text&quot;, enumObj);
+    }</code></pre></noscript></div>
+</p>
+
+<p>Here is an example usage:</p>
+
+<p><div><script src='https://gist.github.com/3726104.js?file=HomeController.cs'></script>
+<noscript><pre><code>  
+    public enum QueryTypes
+    {
+        Web,
+        Images,
+        Documents
+    }
+
+
+    public class HomeController : Controller
+    {
+        public ActionResult Index()
+        {
+            ViewBag.Select = typeof(QueryTypes).ToSelectList();
+            return View();
+        }
+    }</code></pre></noscript></div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

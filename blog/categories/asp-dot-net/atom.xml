@@ -1,109 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <title>System.Net.IP.Address Shortcomings - Kyle Rogers</title>
-  <meta name="author" content="Kyle Rogers">
-
-  
-  <meta name="description" content="Dealing with the lack of support for a true IPAddress object within .NET">
-  <meta name="keywords" content="asp.net, C#, ipaddress, system.net.ipaddress">
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://keroger2k.github.io/blog/2012/06/06/system-dot-net-dot-ip-dot-address-shortcomings">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="Kyle Rogers" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-32341527-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
-</head>
-
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Kyle Rogers</a></h1>
-  
-    <h2>clever subtitle here</h2>
-  
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:keroger2k.github.io" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article class="hentry" role="article">
-  
-  <header>
+  <title><![CDATA[Category: ASP.NET, | Kyle Rogers]]></title>
+  <link href="http://keroger2k.github.io/blog/categories/asp-dot-net/atom.xml" rel="self"/>
+  <link href="http://keroger2k.github.io/"/>
+  <updated>2013-08-21T21:48:26-05:00</updated>
+  <id>http://keroger2k.github.io/</id>
+  <author>
+    <name><![CDATA[Kyle Rogers]]></name>
     
-      <h1 class="entry-title">System.Net.IP.Address Shortcomings</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
 
   
+  <entry>
+    <title type="html"><![CDATA[Enums to SelectList]]></title>
+    <link href="http://keroger2k.github.io/blog/2012/09/20/enums-to-selectlist/"/>
+    <updated>2012-09-20T16:48:00-05:00</updated>
+    <id>http://keroger2k.github.io/blog/2012/09/20/enums-to-selectlist</id>
+    <content type="html"><![CDATA[<p>Recently I had an interview where I was sharing my screen to a couple people who were watching me struggle through the simple task they had me complete.  I had to create a simple drop down list that contain three values and my first thought for whatever reason was to use an Enum and just bind that to a drop down list with the HTML helper object.  However, it had been awhile since I had actually had to do that and after about 1 minute of trying to get it to work I simply gave up and moved on as  I was on the clock.  After the interview I looked back at some code that I currently maintain and found my solution.  It definitely brought back some of the pain that went into the initial implementation.  Although the answer is quite simple, during the pressure of an interview I just couldn’t recall.
+Basically, I just used a generic extension method off of type TEnum.  This allows you to just reference a single value of the Enum do a ToSelectList();</p>
+
+<p><div><script src='https://gist.github.com/3726104.js?file=EnumExtensions.cs'></script>
+<noscript><pre><code>
+    public static SelectList ToSelectList&lt;TEnum&gt;(this TEnum enumObj) 
+    {
+
+        var values = from TEnum e in Enum.GetValues(typeof(TEnum))
+                     select new { Value = e, Text = e.ToString() };
+
+        return new SelectList(values, &quot;Value&quot;, &quot;Text&quot;, enumObj);
+    }</code></pre></noscript></div>
+</p>
+
+<p>Here is an example usage:</p>
+
+<p><div><script src='https://gist.github.com/3726104.js?file=HomeController.cs'></script>
+<noscript><pre><code>  
+    public enum QueryTypes
+    {
+        Web,
+        Images,
+        Documents
+    }
 
 
-<time datetime="2012-06-06T15:35:00-05:00" pubdate data-updated="true">Jun 6<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-<div class="entry-content"><h1>Overview</h1>
+    public class HomeController : Controller
+    {
+        public ActionResult Index()
+        {
+            ViewBag.Select = typeof(QueryTypes).ToSelectList();
+            return View();
+        }
+    }</code></pre></noscript></div>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[System.Net.IP.Address Shortcomings]]></title>
+    <link href="http://keroger2k.github.io/blog/2012/06/06/system-dot-net-dot-ip-dot-address-shortcomings/"/>
+    <updated>2012-06-06T15:35:00-05:00</updated>
+    <id>http://keroger2k.github.io/blog/2012/06/06/system-dot-net-dot-ip-dot-address-shortcomings</id>
+    <content type="html"><![CDATA[<h1>Overview</h1>
 
 <p>Perhaps I&rsquo;m going about this completely the wrong way, but from what I can tell, there really isn&rsquo;t much logic built into the framework for IP Addressing and C#. There is a <a href="http://msdn.microsoft.com/en-us/library/system.net.ipaddress.aspx">System.Net.IPAddress</a> class that has some very limited capabilities IMO. I just don&rsquo;t understand why there isn&rsquo;t some additional functionality with this class or some sister class that helps simplify common tasks with IP address functionality. For example an IP address is mostly useless alone. Without a subnet mask you have no real sense of the IP address. Once you have the subnet mask you then can extrapolate all the details such as network address, broadcast address, size, etc&hellip; I wish the System.Net.IPAddress class allowed you to do more things like this natively.</p>
 
@@ -111,7 +70,7 @@
 
 <h1>The Code</h1>
 
-<div><script src='https://gist.github.com/2884281.js?file=IPHelper.cs'></script>
+<p><div><script src='https://gist.github.com/2884281.js?file=IPHelper.cs'></script>
 <noscript><pre><code>public class IPHelper : IIPHelper {
     /// &lt;summary&gt;
     /// Verifies IP Address is Valid
@@ -317,13 +276,13 @@
       return (retValue);
     }
   } </code></pre></noscript></div>
-
+</p>
 
 <h1>The Tests</h1>
 
 <p>Here are a few test to ensure the validity of the IPHelper class. I know there are probably a lot more test I could create, but right now this has covered everything. So far so good.</p>
 
-<div><script src='https://gist.github.com/2884281.js?file=IPHelperTests.cs'></script>
+<p><div><script src='https://gist.github.com/2884281.js?file=IPHelperTests.cs'></script>
 <noscript><pre><code>[TestFixture]
   public class IPHelperTests {
 
@@ -525,198 +484,8 @@
 
     }
   }</code></pre></noscript></div>
-
-</div>
-
-
-  <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Kyle Rogers</span></span>
-
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-06T15:35:00-05:00" pubdate data-updated="true">Jun 6<span>th</span>, 2012</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/asp-dot-net/'>ASP.NET,</a>, <a class='category' href='/blog/categories/mvc/'>MVC</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://keroger2k.github.io/blog/2012/06/06/system-dot-net-dot-ip-dot-address-shortcomings/" data-via="keroger2k" data-counturl="http://keroger2k.github.io/blog/2012/06/06/system-dot-net-dot-ip-dot-address-shortcomings/" >Tweet</a>
-  
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2012/06/01/up-and-running-with-sinatra/" title="Previous Post: Up and running with Sinatra">&laquo; Up and running with Sinatra</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2012/06/17/happy-fathers-day/" title="Next Post: Happy Fathers Day">Happy Fathers Day &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-  </section>
-
-</div>
-
-<aside class="sidebar">
-  
-    <a href="http://stackoverflow.com/users/342706/kyle-rogers">
-<img src="http://stackoverflow.com/users/flair/342706.png" width="208" height="58" alt="profile for Kyle Rogers at Stack Overflow, Q&amp;A for professional and enthusiast programmers" title="profile for Kyle Rogers at Stack Overflow, Q&amp;A for professional and enthusiast programmers">
-</a><section style="margin-top: 10px;">
-  <span>Hello I'm <strong>Kyle Rogers</strong></span>
-  <p>I'm a Microsoft Certified Software Developer (MCSD), mainly focused on MVC and Webforms. I have over 5 years software development experience and many more years of experience in the Information Technology Industry.</p>
-  <p>I live in the middle of the country in <strong>Bloomington, IL</strong>.  You can contact me at <strong><a href="mailto:kyle.rogers@gmail.com">kyle.rogers@gmail.com</a></strong> or <strong><a href='/about'>read more about me</a></strong>
-</section>
-<section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2013/08/21/max-width-and-min-width-media-queries-in-internet-explorer-8-and-below/">Max-width and Min-width Media Queries in Internet Explorer 8 and Below</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/01/20/cisco-hash-perl-port-to-c-number/">Cisco::Hash Perl Port to C#</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/09/20/enums-to-selectlist/">Enums to SelectList</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/06/17/happy-fathers-day/">Happy Fathers Day</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/06/06/system-dot-net-dot-ip-dot-address-shortcomings/">System.Net.IP.Address Shortcomings</a>
-      </li>
-    
-  </ul>
-</section>
-<a class="twitter-timeline" href="https://twitter.com/keroger2k" data-widget-id="369935586393485312">Tweets by @keroger2k</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
-  </ul>
-  
-  <a href="https://github.com/keroger2k">@keroger2k</a> on GitHub
-  
-  <script type="text/javascript">
-    $(document).ready(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'keroger2k',
-            count: 3,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-
-<section class="googleplus">
-  <h1>
-    <a href="https://plus.google.com/kyle.rogers@gmail.com?rel=author">
-      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
-      Google+
-    </a>
-  </h1>
-</section>
-
-
-
-  
-</aside>
-
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Kyle Rogers -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
-
-</footer>
+]]></content>
+  </entry>
   
-
-<script type="text/javascript">
-      var disqus_shortname = 'watersound';
-      
-        
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://keroger2k.github.io/blog/2012/06/06/system-dot-net-dot-ip-dot-address-shortcomings/';
-        var disqus_url = 'http://keroger2k.github.io/blog/2012/06/06/system-dot-net-dot-ip-dot-address-shortcomings/';
-        var disqus_script = 'embed.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
-
-
-
-
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
-
-
-</body>
-</html>
+</feed>
