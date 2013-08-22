@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: MVC, | Kyle Rogers]]></title>
-  <link href="http://keroger2k.github.io/blog/categories/mvc/atom.xml" rel="self"/>
+  <title><![CDATA[Category: ASPNET, | Kyle Rogers]]></title>
+  <link href="http://keroger2k.github.io/blog/categories/aspnet/atom.xml" rel="self"/>
   <link href="http://keroger2k.github.io/"/>
   <updated>2013-08-22T09:10:50-05:00</updated>
   <id>http://keroger2k.github.io/</id>

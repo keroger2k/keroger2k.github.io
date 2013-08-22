@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Sinatra | Kyle Rogers]]></title>
   <link href="http://keroger2k.github.io/blog/categories/sinatra/atom.xml" rel="self"/>
   <link href="http://keroger2k.github.io/"/>
-  <updated>2013-08-22T09:05:06-05:00</updated>
+  <updated>2013-08-22T09:10:50-05:00</updated>
   <id>http://keroger2k.github.io/</id>
   <author>
     <name><![CDATA[Kyle Rogers]]></name>
@@ -70,36 +70,92 @@ application up and running.</p>
 
 <p>A lot of the gems above I used because <a href="http://www.heroku.com">Heroku</a>.  It just makes things easier for me.  There are a lot of great alternatives to mustache, thin, etc&hellip;, but I&rsquo;ll be using these in my examples.  There are also some gems for testing that I like to use, but they are not required for getting up and running.</p>
 
-<p>{% gist 2848476 Gemfile %}</p>
+<p><div><script src='https://gist.github.com/2848476.js?file=Gemfile'></script>
+<noscript><pre><code>source 'http://rubygems.org'
+gem 'rack'
+gem 'rake'
+gem 'sinatra'
+gem 'mustache'
+gem 'foreman'
+gem 'thin'
+
+group :test do
+  gem 'rack-test'
+  gem 'mocha',        '~&gt;0.11.1'
+end
+</code></pre></noscript></div>
+</p>
 
 <p>The procfile is what foreman uses to start the thin webserver.  In the example below it is telling the thin webserver
 to start up and use port 5050.  Once the webserver is up and running you will be able to preview the results by going to
 <a href="http://localhost:5050">http://localhost:5050</a>.</p>
 
-<p>{% gist 2848476 Procfile %}</p>
+<p><div><script src='https://gist.github.com/2848476.js?file=Procfile'></script>
+<noscript><pre><code>web:      bundle exec thin start -p 5050
+</code></pre></noscript></div>
+</p>
 
 <p>The config.ru file is executed when the application is starting and instructs the application
 to require certain libraries that we&rsquo;ve included.  In this example I&rsquo;ve put most of the require statements in a file called boot.rb and the first line is giving it the location to that file for the includes.</p>
 
-<p>{% gist 2848476 config.ru %}</p>
+<p><div><script src='https://gist.github.com/2848476.js?file=config.ru'></script>
+<noscript><pre><code>require File.expand_path(File.dirname(__FILE__) + '/app/boot')
+
+map('/')         { run Hotel::App }</code></pre></noscript></div>
+</p>
 
 <p>The boot.rb file isn&rsquo;t required, because it could all be put into the config.ru file, but this is a nice way
 to keep the require statements for the application in a centralized place.</p>
 
-<p>{% gist 2848476 boot.rb %}</p>
+<p><div><script src='https://gist.github.com/2848476.js?file=boot.rb'></script>
+<noscript><pre><code>$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__))
+
+require &quot;rubygems&quot;
+require &quot;bundler/setup&quot;
+
+require 'sinatra/base'
+require 'mustache/sinatra'
+
+require 'hotel'
+require 'app'
+</code></pre></noscript></div>
+</p>
 
 <p>Using rake can be extremely powerful.  It allows you to configure common tasks within your application.  In the startup example there is only one task that needs to be performed, starting the application itself.  In this example it is telling foreman to start which in turn will read the Procfile in the root directory and foreman will start the thin webserver on the port 5050.</p>
 
-<p>{% gist 2848476 Rakefile %}</p>
+<p><div><script src='https://gist.github.com/2848476.js?file=Rakefile'></script>
+<noscript><pre><code>require 'rubygems'
+require 'rake'
+
+$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/app')
+
+require 'boot'
+
+desc &quot;Start the server&quot;
+task :start do
+  Kernel.exec &quot;bundle exec foreman start&quot;
+end</code></pre></noscript></div>
+</p>
 
 <p>The app.rb is the meat of the application so far.  This class inherits from Sinatra::Base.  This is the base class for all Sinatra applications.  Here we are telling our Sinatra application to respond to only the &ldquo;/&rdquo; GET request.  So any other request currently will return a 404.  If a &ldquo;/&rdquo; GET request is received it will simply respond with the current time on the server.  Nothing fancy but proves that Sinatra is up and running correctly.  You will need to understand the different HTML
 method definitions to layout responses for your Sinatra application.  The most commonly used methods are GET, POST, PUT, DELETE.</p>
 
-<p>{% gist 2848476 app.rb %}</p>
+<p><div><script src='https://gist.github.com/2848476.js?file=app.rb'></script>
+<noscript><pre><code>module Hotel
+  class App &lt; Sinatra::Base
+    get &quot;/&quot; do
+      &quot;Hello world, it's #{Time.now} at the server!&quot;
+    end
+  end
+end</code></pre></noscript></div>
+</p>
 
 <p>Here is where application specific logic will be stored.  Nothing is currently required so this is an empty class currently.</p>
 
-<p>{% gist 2848476 hotel.rb %}</p>
+<p><div><script src='https://gist.github.com/2848476.js?file=hotel.rb'></script>
+<noscript><pre><code>module Hotel
+end</code></pre></noscript></div>
+</p>
 
 <p>Once all theses file are created and in place.  Run &lsquo;rake start&rsquo; and visit <a href="http://localhost:5050">http://localhost:5050</a> to see the current time on the server.</p>
 

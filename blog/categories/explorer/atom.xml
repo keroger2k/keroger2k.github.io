@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Explorer, | Kyle Rogers]]></title>
   <link href="http://keroger2k.github.io/blog/categories/explorer/atom.xml" rel="self"/>
   <link href="http://keroger2k.github.io/"/>
-  <updated>2013-08-22T09:05:06-05:00</updated>
+  <updated>2013-08-22T09:10:50-05:00</updated>
   <id>http://keroger2k.github.io/</id>
   <author>
     <name><![CDATA[Kyle Rogers]]></name>
@@ -24,17 +24,16 @@
 
 <p><a href="https://github.com/scottjehl/Respond">Resond.js</a> to the rescue.</p>
 
-<p>{% blockquote %}
-How&rsquo;s it work?</p>
-
-<p>Basically, the script loops through the CSS referenced in the page and runs a regular expression or two on their contents to find media queries and their associated blocks of CSS. In Internet Explorer, the content of the stylesheet is impossible to retrieve in its pre-parsed state (which in IE 8-, means its media queries are removed from the text), so Respond.js re-requests the CSS files using Ajax and parses the text response from there. Be sure to configure your CSS files' caching properly so that this re-request doesn&rsquo;t actually go to the server, hitting your browser cache instead.</p>
-
-<p>From there, each media query block is appended to the head in order via style elements, and those style elements are enabled and disabled (read: appended and removed from the DOM) depending on how their min/max width compares with the browser width. The media attribute on the style elements will match that of the query in the CSS, so it could be &ldquo;screen&rdquo;, &ldquo;projector&rdquo;, or whatever you want. Any relative paths contained in the CSS will be prefixed by their stylesheet&rsquo;s href, so image paths will direct to their proper destination
-{% endblockquote %}</p>
+<p><blockquote><p>How&rsquo;s it work?</p></p><p><p>Basically, the script loops through the CSS referenced in the page and runs a regular expression or two on their contents to find media queries and their associated blocks of CSS. In Internet Explorer, the content of the stylesheet is impossible to retrieve in its pre-parsed state (which in IE 8-, means its media queries are removed from the text), so Respond.js re-requests the CSS files using Ajax and parses the text response from there. Be sure to configure your CSS files' caching properly so that this re-request doesn&rsquo;t actually go to the server, hitting your browser cache instead.</p></p><p><p>From there, each media query block is appended to the head in order via style elements, and those style elements are enabled and disabled (read: appended and removed from the DOM) depending on how their min/max width compares with the browser width. The media attribute on the style elements will match that of the query in the CSS, so it could be &ldquo;screen&rdquo;, &ldquo;projector&rdquo;, or whatever you want. Any relative paths contained in the CSS will be prefixed by their stylesheet&rsquo;s href, so image paths will direct to their proper destination</p></blockquote></p>
 
 <p>After adding the <code>respond.js</code> script tag in my <code>&lt;head&gt;</code> tag and refreshing the page my problem was solved.  I also used a conditional clause to only load the script for IE8 or less.</p>
 
-<p>{% gist 6299948 index.html %}</p>
+<p><div><script src='https://gist.github.com/6299948.js?file=index.html'></script>
+<noscript><pre><code>&lt;!--[if lt IE 9]&gt;
+  &lt;script src=&quot;/js/respond.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+  &lt;link href=&quot;/css/ie.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+&lt;![endif]--&gt;</code></pre></noscript></div>
+</p>
 
 <p>Hope this helps someone.  Not that it was a hard problem to solve, but it was shocking that Twitter Bootstrap didn&rsquo;t account for this issue.  Good luck.</p>
 ]]></content>

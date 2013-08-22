@@ -4,7 +4,7 @@
   <title><![CDATA[Kyle Rogers]]></title>
   <link href="http://keroger2k.github.io/atom.xml" rel="self"/>
   <link href="http://keroger2k.github.io/"/>
-  <updated>2013-08-21T21:57:26-05:00</updated>
+  <updated>2013-08-22T09:10:50-05:00</updated>
   <id>http://keroger2k.github.io/</id>
   <author>
     <name><![CDATA[Kyle Rogers]]></name>
@@ -45,7 +45,7 @@
     <link href="http://keroger2k.github.io/blog/2013/01/20/cisco-hash-perl-port-to-c-number/"/>
     <updated>2013-01-20T16:46:00-06:00</updated>
     <id>http://keroger2k.github.io/blog/2013/01/20/cisco-hash-perl-port-to-c-number</id>
-    <content type="html"><![CDATA[<p>Recently had to write a script that looks at passwords on cisco devices.  This small piece of code is a port of Perl’s Cisco::Hash module to C#.  Nothing fancy but it works.  Don’t have a need for the encrypt portion so I didn’t add that just yet.  Maybe later.</p>
+    <content type="html"><![CDATA[<p>Recently had to write a script that looks at passwords on cisco devices.  This small piece of code is a port of Perl&rsquo;s Cisco::Hash module to C#.  Nothing fancy but it works.  Don&rsquo;t have a need for the encrypt portion so I didn&rsquo;t add that just yet.  Maybe later.</p>
 
 <div><script src='https://gist.github.com/4457022.js?file=IOS7Crypt.cs'></script>
 <noscript><pre><code>public static class IOS7Crypt {
@@ -83,6 +83,8 @@
 
   }</code></pre></noscript></div>
 
+
+
 ]]></content>
   </entry>
   
@@ -91,7 +93,7 @@
     <link href="http://keroger2k.github.io/blog/2012/09/20/enums-to-selectlist/"/>
     <updated>2012-09-20T16:48:00-05:00</updated>
     <id>http://keroger2k.github.io/blog/2012/09/20/enums-to-selectlist</id>
-    <content type="html"><![CDATA[<p>Recently I had an interview where I was sharing my screen to a couple people who were watching me struggle through the simple task they had me complete.  I had to create a simple drop down list that contain three values and my first thought for whatever reason was to use an Enum and just bind that to a drop down list with the HTML helper object.  However, it had been awhile since I had actually had to do that and after about 1 minute of trying to get it to work I simply gave up and moved on as  I was on the clock.  After the interview I looked back at some code that I currently maintain and found my solution.  It definitely brought back some of the pain that went into the initial implementation.  Although the answer is quite simple, during the pressure of an interview I just couldn’t recall.
+    <content type="html"><![CDATA[<p>Recently I had an interview where I was sharing my screen to a couple people who were watching me struggle through the simple task they had me complete.  I had to create a simple drop down list that contain three values and my first thought for whatever reason was to use an Enum and just bind that to a drop down list with the HTML helper object.  However, it had been awhile since I had actually had to do that and after about 1 minute of trying to get it to work I simply gave up and moved on as  I was on the clock.  After the interview I looked back at some code that I currently maintain and found my solution.  It definitely brought back some of the pain that went into the initial implementation.  Although the answer is quite simple, during the pressure of an interview I just couldn&rsquo;t recall.
 Basically, I just used a generic extension method off of type TEnum.  This allows you to just reference a single value of the Enum do a ToSelectList();</p>
 
 <div><script src='https://gist.github.com/3726104.js?file=EnumExtensions.cs'></script>
@@ -126,6 +128,8 @@ Basically, I just used a generic extension method off of type TEnum.  This allow
             return View();
         }
     }</code></pre></noscript></div>
+
+
 
 ]]></content>
   </entry>
