@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: MVC, | Kyle Rogers]]></title>
+  <title><![CDATA[Category: MVC | Kyle Rogers]]></title>
   <link href="http://keroger2k.github.io/blog/categories/mvc/atom.xml" rel="self"/>
   <link href="http://keroger2k.github.io/"/>
-  <updated>2013-08-21T21:57:26-05:00</updated>
+  <updated>2013-08-22T09:05:06-05:00</updated>
   <id>http://keroger2k.github.io/</id>
   <author>
     <name><![CDATA[Kyle Rogers]]></name>
@@ -14,46 +14,25 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Enums to SelectList]]></title>
-    <link href="http://keroger2k.github.io/blog/2012/09/20/enums-to-selectlist/"/>
-    <updated>2012-09-20T16:48:00-05:00</updated>
-    <id>http://keroger2k.github.io/blog/2012/09/20/enums-to-selectlist</id>
-    <content type="html"><![CDATA[<p>Recently I had an interview where I was sharing my screen to a couple people who were watching me struggle through the simple task they had me complete.  I had to create a simple drop down list that contain three values and my first thought for whatever reason was to use an Enum and just bind that to a drop down list with the HTML helper object.  However, it had been awhile since I had actually had to do that and after about 1 minute of trying to get it to work I simply gave up and moved on as  I was on the clock.  After the interview I looked back at some code that I currently maintain and found my solution.  It definitely brought back some of the pain that went into the initial implementation.  Although the answer is quite simple, during the pressure of an interview I just couldn’t recall.
-Basically, I just used a generic extension method off of type TEnum.  This allows you to just reference a single value of the Enum do a ToSelectList();</p>
+    <title type="html"><![CDATA[System.Net.IP.Address Shortcomings]]></title>
+    <link href="http://keroger2k.github.io/blog/2012/06/06/system-dot-net-dot-ip-dot-address-shortcomings/"/>
+    <updated>2012-06-06T15:35:00-05:00</updated>
+    <id>http://keroger2k.github.io/blog/2012/06/06/system-dot-net-dot-ip-dot-address-shortcomings</id>
+    <content type="html"><![CDATA[<h1>Overview</h1>
 
-<p><div><script src='https://gist.github.com/3726104.js?file=EnumExtensions.cs'></script>
-<noscript><pre><code>
-    public static SelectList ToSelectList&lt;TEnum&gt;(this TEnum enumObj) 
-    {
+<p>Perhaps I&rsquo;m going about this completely the wrong way, but from what I can tell, there really isn&rsquo;t much logic built into the framework for IP Addressing and C#. There is a <a href="http://msdn.microsoft.com/en-us/library/system.net.ipaddress.aspx">System.Net.IPAddress</a> class that has some very limited capabilities IMO. I just don&rsquo;t understand why there isn&rsquo;t some additional functionality with this class or some sister class that helps simplify common tasks with IP address functionality. For example an IP address is mostly useless alone. Without a subnet mask you have no real sense of the IP address. Once you have the subnet mask you then can extrapolate all the details such as network address, broadcast address, size, etc&hellip; I wish the System.Net.IPAddress class allowed you to do more things like this natively.</p>
 
-        var values = from TEnum e in Enum.GetValues(typeof(TEnum))
-                     select new { Value = e, Text = e.ToString() };
+<p>Below are a few methods to help extend on the logic of System.Net.IPAddress. I thought I&rsquo;d share what has been completed so far. I&rsquo;ve also included the NUnit test cases that go along with this class to help with understanding what each of the methods are doing.</p>
 
-        return new SelectList(values, &quot;Value&quot;, &quot;Text&quot;, enumObj);
-    }</code></pre></noscript></div>
-</p>
+<h1>The Code</h1>
 
-<p>Here is an example usage:</p>
+<p>{% gist 2884281 IPHelper.cs %}</p>
 
-<p><div><script src='https://gist.github.com/3726104.js?file=HomeController.cs'></script>
-<noscript><pre><code>  
-    public enum QueryTypes
-    {
-        Web,
-        Images,
-        Documents
-    }
+<h1>The Tests</h1>
 
+<p>Here are a few test to ensure the validity of the IPHelper class. I know there are probably a lot more test I could create, but right now this has covered everything. So far so good.</p>
 
-    public class HomeController : Controller
-    {
-        public ActionResult Index()
-        {
-            ViewBag.Select = typeof(QueryTypes).ToSelectList();
-            return View();
-        }
-    }</code></pre></noscript></div>
-</p>
+<p>{% gist 2884281 IPHelperTests.cs %}</p>
 ]]></content>
   </entry>
   
