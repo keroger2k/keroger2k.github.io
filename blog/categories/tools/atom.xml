@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: tools, | Kyle Rogers]]></title>
+  <link href="http://keroger2k.github.io/blog/categories/tools/atom.xml" rel="self"/>
+  <link href="http://keroger2k.github.io/"/>
+  <updated>2014-03-29T21:38:23-05:00</updated>
+  <id>http://keroger2k.github.io/</id>
+  <author>
+    <name><![CDATA[Kyle Rogers]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[chrome developer tools is now your IDE]]></title>
+    <link href="http://keroger2k.github.io/blog/2013/08/27/chrome-developer-tools-is-now-your-ide/"/>
+    <updated>2013-08-27T21:24:00-05:00</updated>
+    <id>http://keroger2k.github.io/blog/2013/08/27/chrome-developer-tools-is-now-your-ide</id>
+    <content type="html"><![CDATA[<h2>Overview</h2>
+
+<p>How much time do you spend making changes in your IDE then, bringing up a browser and refreshing the pages to check out the lastest changes you made to javascript, CSS or HTML?  Your workflow has become so engrained that anything different just doesn&rsquo;t seem possible.  However, wouldn&rsquo;t it be nice that while you are in chrome developer tools that all the changes that you wanted to save just magically found their way back into the files you are using on disk?  A few months ago at Google I/O <a href="http://www.paulirish.com/">Paul Irish</a> gave a great <a href="http://www.youtube.com/watch?v=x6qe_kVaBpg">talk</a> on workspaces with chrome among other things.  I highly remcommend you check it out.  This video was taken a few months ago so some of the features if not all of them have made their way into the stable branch and you can use them without having to install <a href="https://www.google.com/intl/en/chrome/browser/canary.html">Canary</a>.  Now you can make changes in the browser and have them persist back to disk effortless.  Chrome has become your IDE or at least a much bigger percentage of your IDE functionality.</p>
+
+<h2>Getting Started</h2>
+
+<p>Below is a simple application that contains three files.  An HTML page, CSS for styles and a javascript file.  They are all being loaded by the <code>index.html</code> page.</p>
+
+<p><img class="[class names]" src="/images/chrome/01.png" title="[400] [400] [title text [alt text]]" ></p>
+
+<p><img class="[class names]" src="/images/chrome/02.png" title="[400] [400] [title text [alt text]]" ></p>
+
+<p><img class="[class names]" src="/images/chrome/03.png" title="[400] [400] [title text [alt text]]" ></p>
+
+<p><img class="[class names]" src="/images/chrome/04.png" title="[400] [400] [title text [alt text]]" ></p>
+
+<p><img class="[class names]" src="/images/chrome/05.png" title="[400] [400] [title text [alt text]]" ></p>
+
+<p><img class="[class names]" src="/images/chrome/06.png" title="[400] [400] [title text [alt text]]" ></p>
+
+<p><img class="[class names]" src="/images/chrome/07.png" title="[400] [400] [title text [alt text]]" ></p>
+]]></content>
+  </entry>
+  
+</feed>
